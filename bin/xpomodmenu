@@ -1,0 +1,130 @@
+#!/bin/sh
+
+#
+# xpomodmenu - X11 menu to control Lucas de Sena's pomod Pomodoro timer
+#
+# CHANGE LOG:
+#
+# v0.1   - 2024-12-20 - Morgan Aldridge <morgant@makkintosshu.com>
+#                       Initial version.
+#
+# LICENSE:
+#
+# Copyright (c) 2024 Morgan Aldridge
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+_pomod_state=""
+_pomod_time=""
+
+_pomod_connect() {
+  _pomod_info="$(pomo info)"
+  if [ $? -gt 0 ] ; then
+    _pomod_state="error"
+    _pomod_time=""
+  else
+    _pomod_state="${_pomod_info%%: *}"
+    _pomod_time="${_pomod_info##*: }"
+    [ "$_pomod_state" = "stopped" ] && _pomod_time="00:00"
+  fi
+}
+
+_is_pomod_connected() {
+  [ -n "$_pomod_state" ] && [ $_pomod_state != "error" ]
+}
+
+_pomod_launch() {
+  if ! pgrep -q pomod ; then
+    pomod &
+    _pomod_state="launching"
+    _pomod_time=""
+  fi
+}
+
+_xmenu_item_separator() {
+  printf "\n"
+}
+
+_xmenu_item() {
+  printf "%s\t%s\n" "$1" "$2"
+}
+
+_xmenu_item_noop() {
+  _xmenu_item "$1" ":"
+}
+
+_xmenu_pomo_state() {
+  case "$_pomod_state" in
+    launching)
+      _xmenu_item_noop "Launching..."
+      ;;
+    stopped)
+      _xmenu_item_noop "Stopped"
+      _xmenu_item_separator
+      _xmenu_item_noop "$_pomod_time"
+      ;;
+    pomodoro|shortbreak|longbreak)
+      _description=""
+      case "$_pomod_state" in
+        pomodoro) _description="Pomodoro" ;;
+        shortbreak) _description="Break (Short)" ;;
+        longbreak) _description="Break (Long)" ;;
+      esac
+      _xmenu_item_noop "Cycle: ${_description}"
+      _xmenu_item_separator
+      _xmenu_item_noop "$_pomod_time"
+      ;;
+    *)
+      _xmenu_item_noop "CONFIGURATION ERROR"
+      ;;
+  esac
+}
+
+_xmenu_pomo_action() {
+  case "$_pomod_state" in
+    stopped)
+      _xmenu_item_separator
+      _xmenu_item "Start" "pomo start"
+      ;;
+    pomodoro|shortbreak|longbreak)
+      _xmenu_item_separator
+      _xmenu_item "Stop" "pomo stop"
+      ;;
+  esac
+}
+
+_wmlaunchbutton_xmenu_position() {
+  _icon_geometry="$(printenv BUTTON_GEOMETRY)"
+  _icon_padding="$(printenv BUTTON_GEOMETRY_PADDING)"
+  _icon_padding="${_icon_padding:-0}"
+  [ -n "$_icon_geometry" ] && echo "$_icon_geometry" | while IFS=x+ read -r _w _h _x _y ; do
+    _top="$(( _y + _h + _icon_padding ))"
+    [ "$_x" -ge "$_icon_padding" ] && _left="$(( _x - _icon_padding ))" || _left="$_x"
+    printf "-p %sx%s" "$_left" "$_top"
+  done
+}
+
+_pomod_connect
+#printf "_pomod_state: '%s'\n_pomod_time: '%s'\n" "$_pomod_state" "$_pomod_time"
+_is_pomod_connected || _pomod_launch
+
+xmenu $(_wmlaunchbutton_xmenu_position) <<EOF | sh
+$(_xmenu_pomo_state)
+$(_xmenu_pomo_action)
+EOF
