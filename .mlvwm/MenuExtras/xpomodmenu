@@ -1,0 +1,5 @@
+################################################################################
+# xpomodmenu Menu Extra
+################################################################################
+
+Swallow "wmlaunchbutton" Action Exec "wmlaunchbutton" exec wmlaunchbutton pixmap/time.xpm xpomodmenu

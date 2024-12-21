@@ -30,6 +30,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+PIXMAP_PATH="${PIXMAP_PATH:-pixmap/}"
+
 _pomod_state=""
 _pomod_time=""
 
@@ -65,8 +67,16 @@ _xmenu_item() {
   printf "%s\t%s\n" "$1" "$2"
 }
 
+_xmenu_item_icon() {
+  printf "%s\t%s\t%s\n" "IMG:${PIXMAP_PATH}${1}.png" "$2" "$3"
+}
+
 _xmenu_item_noop() {
   _xmenu_item "$1" ":"
+}
+
+_xmenu_item_noop_icon() {
+  _xmenu_item_icon "$1" "$2" ":"
 }
 
 _xmenu_pomo_state() {
@@ -75,9 +85,9 @@ _xmenu_pomo_state() {
       _xmenu_item_noop "Launching..."
       ;;
     stopped)
-      _xmenu_item_noop "Stopped"
+      _xmenu_item_noop_icon "control_stop_blue" "Stopped"
       _xmenu_item_separator
-      _xmenu_item_noop "$_pomod_time"
+      _xmenu_item_noop_icon "time" "$_pomod_time"
       ;;
     pomodoro|shortbreak|longbreak)
       _description=""
@@ -86,9 +96,9 @@ _xmenu_pomo_state() {
         shortbreak) _description="Break (Short)" ;;
         longbreak) _description="Break (Long)" ;;
       esac
-      _xmenu_item_noop "Cycle: ${_description}"
+      _xmenu_item_noop_icon "control_play_blue" "Cycle: ${_description}"
       _xmenu_item_separator
-      _xmenu_item_noop "$_pomod_time"
+      _xmenu_item_noop_icon "time" "$_pomod_time"
       ;;
     *)
       _xmenu_item_noop "CONFIGURATION ERROR"
@@ -100,11 +110,11 @@ _xmenu_pomo_action() {
   case "$_pomod_state" in
     stopped)
       _xmenu_item_separator
-      _xmenu_item "Start" "pomo start"
+      _xmenu_item_icon "control_play" "Start" "pomo start"
       ;;
     pomodoro|shortbreak|longbreak)
       _xmenu_item_separator
-      _xmenu_item "Stop" "pomo stop"
+      _xmenu_item_icon "control_stop" "Stop" "pomo stop"
       ;;
   esac
 }
