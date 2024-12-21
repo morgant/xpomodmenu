@@ -85,18 +85,18 @@ _xmenu_pomo_state() {
       _xmenu_item_noop "Launching..."
       ;;
     stopped)
-      _xmenu_item_noop_icon "control_stop_blue" "Stopped"
+      _xmenu_item_noop_icon "control_stop_blue" "No Active Pomodoro"
       _xmenu_item_separator
       _xmenu_item_noop_icon "time" "$_pomod_time"
       ;;
     pomodoro|shortbreak|longbreak)
       _description=""
       case "$_pomod_state" in
-        pomodoro) _description="Pomodoro" ;;
+        pomodoro) _description="Focus" ;;
         shortbreak) _description="Break (Short)" ;;
         longbreak) _description="Break (Long)" ;;
       esac
-      _xmenu_item_noop_icon "control_play_blue" "Cycle: ${_description}"
+      _xmenu_item_noop_icon "control_play_blue" "Current Pomodoro: ${_description}"
       _xmenu_item_separator
       _xmenu_item_noop_icon "time" "$_pomod_time"
       ;;
@@ -110,11 +110,11 @@ _xmenu_pomo_action() {
   case "$_pomod_state" in
     stopped)
       _xmenu_item_separator
-      _xmenu_item_icon "control_play" "Start" "pomo start"
+      _xmenu_item_icon "control_play" "Start New Pomodoro" "pomo start"
       ;;
     pomodoro|shortbreak|longbreak)
       _xmenu_item_separator
-      _xmenu_item_icon "control_stop" "Stop" "pomo stop"
+      _xmenu_item_icon "control_stop" "Stop Current Pomodoro" "pomo stop"
       ;;
   esac
 }
