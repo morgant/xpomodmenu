@@ -1,9 +1,11 @@
-PROG = xpomodmenu
+MENUPROG = xpomodmenu
+SERVERPROG = xpomodbell
 
 PREFIX ?= /usr/local
 BINDIR = $(DESTDIR)$(PREFIX)/bin
 SHAREDIR = $(DESTDIR)$(PREFIX)/share
-PIXMAPDIR = $(SHAREDIR)/pixmaps/$(PROG)
+PIXMAPDIR = $(SHAREDIR)/pixmaps/$(MENUPROG)
+SOUNDSDIR = $(SHAREDIR)/sounds/$(SERVERPROG)
 MLVWMRCDIR = $(HOME)/.mlvwm
 
 build: build-pixmap
@@ -19,22 +21,28 @@ build-pixmap:
 
 install: build
 	mkdir -p $(BINDIR)
-	install -m 755 bin/$(PROG) $(BINDIR)
-	sed -i 's@pixmap/@$(PIXMAPDIR)/@g' $(BINDIR)/$(PROG)
+	install -m 755 bin/$(MENUPROG) $(BINDIR)
+	sed -i 's@pixmap/@$(PIXMAPDIR)/@g' $(BINDIR)/$(MENUPROG)
+	install -m 755 bin/$(SERVERPROG) $(BINDIR)
+	sed -i 's@sounds/@$(SOUNDSDIR)/@g' $(BINDIR)/$(SERVERPROG)
 	mkdir -p $(PIXMAPDIR)
 	cp -R pixmap/* $(PIXMAPDIR)/
+	mkdir -p $(SOUNDSDIR)
+	cp -R sounds/* $(SOUNDSDIR)/
 
 install-mlvwmrc-menuextra:
 	mkdir -p $(MLVWMRCDIR)/MenuExtras
-	install .mlvwm/MenuExtras/$(PROG) $(MLVWMRCDIR)/MenuExtras
-	sed -i 's@pixmap/@$(PIXMAPDIR)/@g' $(MLVWMRCDIR)/MenuExtras/$(PROG)
+	install .mlvwm/MenuExtras/$(MENUPROG) $(MLVWMRCDIR)/MenuExtras
+	sed -i 's@pixmap/@$(PIXMAPDIR)/@g' $(MLVWMRCDIR)/MenuExtras/$(MENUPROG)
 
 uninstall:
-	rm $(BINDIR)/$(PROG)
+	rm $(BINDIR)/$(MENUPROG)
+	rm $(BINDIR)/$(SERVERPROG)
 	rm -r $(PIXMAPDIR)
+	rm -r $(SOUNDSDIR)
 
 uninstall-mlvwmrc-menuexra:
-	rm $(MLVWMRCDIR)/MenuExtras/$(PROG)
+	rm $(MLVWMRCDIR)/MenuExtras/$(MENUPROG)
 
 clean: clean-pixmap
 

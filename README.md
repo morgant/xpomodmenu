@@ -59,7 +59,7 @@ xpomodbell
 Since this is intended to be used with `mlvwmrc`, it's suggested that you add the following line to your `~/.mlvwm/.initrc` configuration:
 
 ```
-Exec "xpomodbell" exec xpomodbell
+Exec "xpomodbell" exec /usr/local/bin/xpomodbell &
 ```
 
 ### The Pomodoro Menu
