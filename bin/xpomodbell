@@ -1,0 +1,79 @@
+#!/bin/sh
+
+#
+# xpomodbell - X11 audio bell for Lucas de Sena's pomod Pomodoro timer
+#
+# CHANGE LOG:
+#
+# v0.1   - 2024-12-20 - Morgan Aldridge <morgant@makkintosshu.com>
+#                       Initial version.
+#
+# LICENSE:
+#
+# Copyright (c) 2024 Morgan Aldridge
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+DISPLAY="${DISPLAY:-:0}"
+SOUND_PATH="${SOUND_PATH:-sounds/}"
+
+_verbose=true
+_volume="100"
+_pomodoro_length=25
+_shortbreak_length=5
+_longbreak_length=30
+
+_is_pomod_running() {
+  pgrep -qu "$USER" pomod
+}
+
+_mpv_play_sound_async() {
+  $_verbose && printf "\tPlaying sound '%s' asynchronously (volume: %i)...\n" "$1" "$_volume"
+  export DISPLAY="$DISPLAY"
+  mpv \
+    --no-config \
+    --no-terminal \
+    --no-video \
+    --no-resume-playback \
+    --volume="$_volume" \
+    "${SOUND_PATH}${1}" &
+}
+
+_pomod_launch() {
+  $_verbose && printf "Starting pomod server and monitoring cycle event notifications...\n"
+  pomod -p "$_pomodoro_length" -s "$_shortbreak_length" -l "$_longbreak_length" | while read -r _line ; do
+    case "$_line" in
+      pomodoro)
+        $_verbose && printf "\tStarting focus cycle ('%s'; %i minutes)...\n" "$_line" "$_pomodoro_length"
+        _mpv_play_sound_async "367128__milivolt__keisu-temple-bell.wav"
+        ;;
+      shortbreak|longbreak)
+        $_verbose && printf "\tStarting break cycle ('%s')...\n" "$_line"
+        _mpv_play_sound_async "668647__tec_studio__temple_bell_002.wav"
+        ;;
+      *)
+        $_verbose && printf "\tUnknown cycle '%s'!\n" "$_line"
+        ;;
+    esac
+  done
+  $_verbose && printf "pomod server has stopped.\n"
+}
+
+_is_pomod_running && printf "ERROR! pomod is already running! Exiting.\n" && exit 1
+_pomod_launch

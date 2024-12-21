@@ -9,12 +9,13 @@ MLVWMRCDIR = $(HOME)/.mlvwm
 build: build-pixmap
 
 build-pixmap:
-	convert pixmap/time.{png,xpm}
-	convert pixmap/time_go.{png,xpm}
 	convert pixmap/control_play.{png,xpm}
 	convert pixmap/control_play_blue.{png,xpm}
 	convert pixmap/control_stop.{png,xpm}
 	convert pixmap/control_stop_blue.{png,xpm}
+	convert pixmap/error.{png,xpm}
+	convert pixmap/time.{png,xpm}
+	convert pixmap/time_go.{png,xpm}
 
 install: build
 	mkdir -p $(BINDIR)

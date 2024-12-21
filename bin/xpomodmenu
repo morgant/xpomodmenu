@@ -51,14 +51,6 @@ _is_pomod_connected() {
   [ -n "$_pomod_state" ] && [ $_pomod_state != "error" ]
 }
 
-_pomod_launch() {
-  if ! pgrep -q pomod ; then
-    pomod &
-    _pomod_state="launching"
-    _pomod_time=""
-  fi
-}
-
 _xmenu_item_separator() {
   printf "\n"
 }
@@ -81,9 +73,6 @@ _xmenu_item_noop_icon() {
 
 _xmenu_pomo_state() {
   case "$_pomod_state" in
-    launching)
-      _xmenu_item_noop "Launching..."
-      ;;
     stopped)
       _xmenu_item_noop_icon "control_stop_blue" "No Active Pomodoro"
       _xmenu_item_separator
@@ -101,7 +90,7 @@ _xmenu_pomo_state() {
       _xmenu_item_noop_icon "time" "$_pomod_time"
       ;;
     *)
-      _xmenu_item_noop "CONFIGURATION ERROR"
+      _xmenu_item_noop_icon "error" "CONFIGURATION ERROR"
       ;;
   esac
 }
@@ -132,7 +121,6 @@ _wmlaunchbutton_xmenu_position() {
 
 _pomod_connect
 #printf "_pomod_state: '%s'\n_pomod_time: '%s'\n" "$_pomod_state" "$_pomod_time"
-_is_pomod_connected || _pomod_launch
 
 xmenu $(_wmlaunchbutton_xmenu_position) <<EOF | sh
 $(_xmenu_pomo_state)
