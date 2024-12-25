@@ -33,11 +33,22 @@
 DISPLAY="${DISPLAY:-:0}"
 SOUND_PATH="${SOUND_PATH:-sounds/}"
 
-_verbose=true
+_verbose=false
 _volume="100"
 _pomodoro_length=25
 _shortbreak_length=5
 _longbreak_length=30
+
+_usage() {
+  printf "Usage: %s [-v] [-V volume] [-p minutes] [-b minutes] [-B minutes]\n\n" "$(basename "$0")"
+  printf "Options:\n"
+  printf "\t-b <minutes>  Set short break duration in minutes (default: 5)\n"
+  printf "\t-B <minutes>  Set long break duartion in minutes (default:30)\n"
+  printf "\t-h            Print help (this message) and exit\n"
+  printf "\t-p <minutes>  Set pomodoro duration in minutes (default:25)\n"
+  printf "\t-v            Enable verbose output\n"
+  printf "\t-V <volume>   Set bell sound volume (0-100; default: 100)\n"
+}
 
 _is_pomod_running() {
   pgrep -qu "$USER" pomod
@@ -74,6 +85,35 @@ _pomod_launch() {
   done
   $_verbose && printf "pomod server has stopped.\n"
 }
+
+# parse arguments
+while getopts hvV:p:b:B: _arg ; do
+  case "$_arg" in
+    h)
+      _usage && exit
+      ;;
+    v)
+      _verbose=true
+      ;;
+    V)
+      _volume="$OPTARG"
+      ;;
+    p)
+      _pomodoro_length="$OPTARG"
+      ;;
+    b)
+      _shortbreak_length="$OPTARG"
+      ;;
+    B)
+      _longbreak_length="$OPTARG"
+      ;;
+    ?|*)
+      usage && exit 2
+      ;;
+  esac
+done
+shift $((OPTIND - 1))
+[ $# -gt 0 ] && usage && exit 2
 
 _is_pomod_running && printf "ERROR! pomod is already running! Exiting.\n" && exit 1
 _pomod_launch

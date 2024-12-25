@@ -62,6 +62,26 @@ Since this is intended to be used with `mlvwmrc`, it's suggested that you add th
 Exec "xpomodbell" exec /usr/local/bin/xpomodbell &
 ```
 
+#### Options
+
+`xpomodbell` does support a few command line options. Run `xpomodbell -h` for help.
+
+##### Bell Sound Volume
+
+You can specify the volume at which to play the bell notification sound by passing in a percentage (0..100) with the `-V` option (the default is `100`). For example:
+
+```
+xpomodbell -V 75
+```
+
+##### Pomodoro Work & Break Duration
+
+You can specify the duration of the pomodoro work cycle by passing in a number of minutes (default is `25`) with the `-p` option. Similarly, the short & long break durations by passing in a number of minutes with the `-b` (short) and `-B` (long) options (default is `5` for short break and `30` for long break). For example:
+
+```
+xpomodbell -p 50 -b 15 -B 60
+```
+
 ### The Pomodoro Menu
 
 You can manually execute `xpomodmenu` in any way you prefer, which will show the pomodoro menu at your cursor. These instructions assume you've installed the Menu Extra as described in the installation instructions and click on the icon in the MLVWM menu bar to open the menu.
