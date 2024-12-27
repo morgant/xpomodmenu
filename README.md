@@ -88,12 +88,17 @@ You can manually execute `xpomodmenu` in any way you prefer, which will show the
 
 __TBD__
 
+## CHANGE LOG
+
+see [CHANGELOG.md] for detailed version history.
+
 ## LICENSE
+
+Released under the [MIT license](LICENSE).
 
 Mark James' [FamFamFam Silk Icons](https://github.com/markjames/famfamfam-silk-icons) licensed under the [Creative Commons Attribution 2.5 License](http://creativecommons.org/licenses/by/2.5/).
 
-Keisu temple bell by milivolt -- https://freesound.org/s/367128/ -- License: Attribution 4.0
+[Keisu temple bell](https://freesound.org/people/milivolt/sounds/367128/) by [milivolt](https://freesound.org/people/milivolt/) licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/).
 
 temple_bell_002.wav by tec_studio -- https://freesound.org/s/668647/ -- License: Creative Commons 0
-
-Released under the [MIT license](LICENSE).
+[temple_bell_002.wav](https://freesound.org/people/tec_studio/sounds/668647/) by [tec_studio](https://freesound.org/people/tec_studio/) licensed under the [Creative Commons Zero 1.0 License](http://creativecommons.org/publicdomain/zero/1.0/).

@@ -7,6 +7,9 @@
 #
 # v0.1   - 2024-12-20 - Morgan Aldridge <morgant@makkintosshu.com>
 #                       Initial version.
+# v0.2   - 2024-12-25 - Added built-in help, plus arguments for setting
+#                       bell volume level, pomodoro and short/long break
+#                       durations.
 #
 # LICENSE:
 #
