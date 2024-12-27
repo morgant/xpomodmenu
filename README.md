@@ -90,7 +90,7 @@ __TBD__
 
 ## CHANGE LOG
 
-see [CHANGELOG.md] for detailed version history.
+See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
 
 ## LICENSE
 
