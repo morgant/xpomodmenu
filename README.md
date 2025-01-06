@@ -16,8 +16,16 @@ A minimal set of X11 utilities which interact with & control Lucas de Sena's [po
     * Shows the current state of `pomod` (configuration error, stopped, or current pomodoro cycle)
     * Shows the elapsed time in the current pomodoro cycle
     * Supports starting/stopping the current pomodoro cycles
-* mlvwmrc Menu Extra:
-    * Provides an icon in the MLVWM menu bar which will show the `xpomodmenu` when clicked on
+    * Supports launching a floating window showing the current pomodoro cycle and elapsed time
+* `xpomoinfo`:
+    * Shows a floating window with:
+        * The current state of `pomod` (stopped or current pomodoro cycle) in the window title
+        * The elapsed time in the current pomodoro cycle in the window
+* mlvwmrc:
+    * Menu Extra:
+        * Provides an icon in the MLVWM menu bar which will show the `xpomodmenu` when clicked on
+    * Application Styles:
+        * Provides icon & window styling for `xpomoinfo` floating window
 
 ## PREREQUISITES
 
@@ -25,6 +33,7 @@ A minimal set of X11 utilities which interact with & control Lucas de Sena's [po
 * [pomod](https://github.com/phillbush/pomod)
 * [wmlaunchbutton](https://github.com/phillbush/wmlaunchbutton)
 * [xmenu](https://github.com/phillbush/xmenu)
+* `xterm`
 
 ## INSTALLATION
 
@@ -40,11 +49,19 @@ Install the Menu Extra in your `~/.mlvwm/MenuExtras/` directory by running:
 make install-mlvwmrc-menuextra
 ```
 
-Then edit your `~.mlvwm/MenuBar` configuration file to add the following line in the appropriate "Menu Extras" section:
+Next, edit your `~/.mlvwm/apps/.AppsManifest` configurationfile to add the following line:
+
+```
+Read .mlvwm/apps/xpomoinfo
+```
+
+Next, edit your `~/.mlvwm/MenuBar` configuration file to add the following line in the appropriate "Menu Extras" section:
 
 ```
 Read .mlvwm/MenuExtras/xpomodmenu
 ```
+
+Finally, restart `mlvwm`.
 
 ## USAGE
 

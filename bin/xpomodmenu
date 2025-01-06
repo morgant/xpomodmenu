@@ -7,10 +7,12 @@
 #
 # v0.1   - 2024-12-20 - Morgan Aldridge <morgant@makkintosshu.com>
 #                       Initial version.
+# v0.3   - 2025-01-06   Updated to launch new xpomoinfo utility when
+#                       timer menu item is selected.
 #
 # LICENSE:
 #
-# Copyright (c) 2024 Morgan Aldridge
+# Copyright (c) 2024-2025 Morgan Aldridge
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -76,7 +78,7 @@ _xmenu_pomo_state() {
     stopped)
       _xmenu_item_noop_icon "control_stop_blue" "No Active Pomodoro"
       _xmenu_item_separator
-      _xmenu_item_noop_icon "time" "$_pomod_time"
+      _xmenu_item_icon "time" "$_pomod_time" "xpomoinfo &"
       ;;
     pomodoro|shortbreak|longbreak)
       _description=""
@@ -87,7 +89,7 @@ _xmenu_pomo_state() {
       esac
       _xmenu_item_noop_icon "control_play_blue" "Current Pomodoro: ${_description}"
       _xmenu_item_separator
-      _xmenu_item_noop_icon "time" "$_pomod_time"
+      _xmenu_item_icon "time" "$_pomod_time" "xpomoinfo &"
       ;;
     *)
       _xmenu_item_noop_icon "error" "CONFIGURATION ERROR"

@@ -1,5 +1,6 @@
 MENUPROG = xpomodmenu
 SERVERPROG = xpomodbell
+TIMERPROG = xpomoinfo
 
 PREFIX ?= /usr/local
 BINDIR = $(DESTDIR)$(PREFIX)/bin
@@ -25,12 +26,17 @@ install: build
 	sed -i 's@pixmap/@$(PIXMAPDIR)/@g' $(BINDIR)/$(MENUPROG)
 	install -m 755 bin/$(SERVERPROG) $(BINDIR)
 	sed -i 's@sounds/@$(SOUNDSDIR)/@g' $(BINDIR)/$(SERVERPROG)
+	install -m 755 bin/$(TIMERPROG) $(BINDIR)/$(TIMERPROG)
 	mkdir -p $(PIXMAPDIR)
 	cp -R pixmap/* $(PIXMAPDIR)/
 	mkdir -p $(SOUNDSDIR)
 	cp -R sounds/* $(SOUNDSDIR)/
 
 install-mlvwmrc-menuextra:
+	mkdir -p $(MLVWMRCDIR)/pixmap
+	cp pixmap/time.xpm $(MLVWMRCDIR)/pixmap/$(TIMERPROG).xpm
+	mkdir -p $(MLVWMRCDIR)/apps
+	install .mlvwm/apps/$(TIMERPROG) $(MLVWMRCDIR)/apps
 	mkdir -p $(MLVWMRCDIR)/MenuExtras
 	install .mlvwm/MenuExtras/$(MENUPROG) $(MLVWMRCDIR)/MenuExtras
 	sed -i 's@pixmap/@$(PIXMAPDIR)/@g' $(MLVWMRCDIR)/MenuExtras/$(MENUPROG)
@@ -38,10 +44,13 @@ install-mlvwmrc-menuextra:
 uninstall:
 	rm $(BINDIR)/$(MENUPROG)
 	rm $(BINDIR)/$(SERVERPROG)
+	rm $(BINDIR)/$(TIMERPROG)
 	rm -r $(PIXMAPDIR)
 	rm -r $(SOUNDSDIR)
 
-uninstall-mlvwmrc-menuexra:
+uninstall-mlvwmrc-menuextra:
+	rm $(MLVWMRCDIR)/pixmap/$(TIMERPROG).xpm
+	rm $(MLVWMRCDIR)/apps/$(TIMERPROG)
 	rm $(MLVWMRCDIR)/MenuExtras/$(MENUPROG)
 
 clean: clean-pixmap

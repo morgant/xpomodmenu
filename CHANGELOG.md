@@ -7,7 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-__n/a__
+### Added
+
+* `xpomoinfo`:
+    * Launches a floating showing:
+        * Current pomodoro cycle in the window title
+        * Elapsed time in the current cycle
+* mlvwmrc Application Styles:
+    * Added `xpomoinfo` application styles
+
+### Fixed:
+
+* `Makefile`: Corrected typo in `uninstall-mlvwmrc-menuextra` target name
+
+### Changed:
+
+* `xpomodmenu`:
+    * Selecting the elapsed time in the current pomodor cycle now launches the new `xpomoinfo` status/timer window
+* `Makefile`:
+    * Installs & uninstalls new `xpomoinfo` utility
+    * Installs & uninstalls `xpomoinfo` application icon & styles
+* Updated README to document the new `xpomoinfo` status/timer window utility & installation
 
 ## [0.2.0] - 2024-12-27
 

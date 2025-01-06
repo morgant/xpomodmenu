@@ -1,0 +1,13 @@
+Menu xpomoinfo-File, Label "File", Left
+"Quit" Action SendMessage C+C
+END
+
+MenuBar xpomoinfo
+xpomoinfo-File
+Default-Edit
+END
+
+Style
+"xpomoinfo" MaxmizeScale 5x1, NoSBarH, NoSBarV
+"xpomoinfo" MiniIcon xpomoinfo.xpm, MenuBar xpomoinfo
+END
