@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+_n/a_
+
+## [0.3.0] - 2025-01-06
+
 ### Added
 
 * `xpomoinfo`:
@@ -28,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     * Installs & uninstalls new `xpomoinfo` utility
     * Installs & uninstalls `xpomoinfo` application icon & styles
 * Updated README to document the new `xpomoinfo` status/timer window utility & installation
+* Updated copyright years & this CHANGELOG
 
 ## [0.2.0] - 2024-12-27
 
@@ -63,6 +68,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * mlvwmrc Menu Extra:
     * Provides an icon in the MLVWM menu bar which will show the `xpomodmenu` when clicked on
 
-[unreleased]: https://github.com/morgant/xpomodmenu/compare/0.2...main
+[unreleased]: https://github.com/morgant/xpomodmenu/compare/0.3...main
+[0.3.0]: https://github.com/morgant/xpomodmenu/compare/0.2...0.3
 [0.2.0]: https://github.com/morgant/xpomodmenu/compare/0.1...0.2
 [0.1.0]: https://github.com/morgant/xpomodmenu/releases/tag/0.1
