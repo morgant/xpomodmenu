@@ -34,6 +34,7 @@ A minimal set of X11 utilities which interact with & control Lucas de Sena's [po
 * [wmlaunchbutton](https://github.com/phillbush/wmlaunchbutton)
 * [xmenu](https://github.com/phillbush/xmenu)
 * `xterm`
+* `ncurses` (for tput(1))
 
 ## INSTALLATION
 

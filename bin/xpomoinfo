@@ -7,6 +7,10 @@
 #
 # v0.3   - 2025-01-06 - Morgan Aldridge <morgant@makkintosshu.com>
 #                       Initial version.
+# v0.3.1 - 2025-07-29 - Morgan Aldridge
+#                       Eliminate Xterm window flickering on by using
+#                       tput(1) to reposition cursor and write over content
+#                       instead of using 'clear' to blank & redraw content.
 #
 # LICENSE:
 #
@@ -48,10 +52,10 @@ xterm \
   -b 8 \
   -title "pomo" \
   -e "while true ; do \
-    clear; \
     _info=\"\$(pomo info)\"; \
     _status=\"\${_info%%:*}\"; \
     _timer=\"\${_info#*: }\"; \
+    tput cup 0 0;
     printf '\033]2;%s\007%s' \"\$_status\" \"\$_timer\"; \
     sleep 1; \
   done"
