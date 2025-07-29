@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _n/a_
 
+## [0.3.1] - 2025-07-29
+
+### Fixed:
+
+* `xpomoinfo`:
+    * Reduced flickering by using tput(1) to move cursor and write over window content instead of blanking entirely before redrawing
+
 ## [0.3.0] - 2025-01-06
 
 ### Added
@@ -68,7 +75,8 @@ _n/a_
 * mlvwmrc Menu Extra:
     * Provides an icon in the MLVWM menu bar which will show the `xpomodmenu` when clicked on
 
-[unreleased]: https://github.com/morgant/xpomodmenu/compare/0.3...main
+[unreleased]: https://github.com/morgant/xpomodmenu/compare/0.3.1...main
+[0.3.1]: https://github.com/morgant/xpomodmenu/compare/0.3...0.3.1
 [0.3.0]: https://github.com/morgant/xpomodmenu/compare/0.2...0.3
 [0.2.0]: https://github.com/morgant/xpomodmenu/compare/0.1...0.2
 [0.1.0]: https://github.com/morgant/xpomodmenu/releases/tag/0.1
