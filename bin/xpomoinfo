@@ -44,7 +44,7 @@ xterm \
   -bg white \
   -fg black \
   -fa "DejaVu Sans Mono" \
-  -fs 32 \
+  -fs 48 \
   -sl 0 \
   +sb \
   -uc \
