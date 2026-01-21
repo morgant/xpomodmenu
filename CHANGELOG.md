@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-_n/a_
+### Changed
+
+* `xpomodmenu`:
+    * Replaced use of 'time' (round analog clock) icons with 'hourglass' icons from the Silk icon set
+* mlvwmrc Application Styles:
+    * Replaced the 'time' icon with the 'hourglass' icon in the `xpomoinfo` application styles
+* Updated README to change `pomod` repository links to my repo (new maintainer)
+* Updated copyright years & this CHANGELOG
 
 ## [0.3.1] - 2025-07-29
 

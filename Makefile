@@ -17,8 +17,8 @@ build-pixmap:
 	convert pixmap/control_stop.{png,xpm}
 	convert pixmap/control_stop_blue.{png,xpm}
 	convert pixmap/error.{png,xpm}
-	convert pixmap/time.{png,xpm}
-	convert pixmap/time_go.{png,xpm}
+	convert pixmap/hourglass.{png,xpm}
+	convert pixmap/hourglass_go.{png,xpm}
 
 install: build
 	mkdir -p $(BINDIR)
@@ -34,7 +34,7 @@ install: build
 
 install-mlvwmrc-menuextra:
 	mkdir -p $(MLVWMRCDIR)/pixmap
-	cp pixmap/time.xpm $(MLVWMRCDIR)/pixmap/$(TIMERPROG).xpm
+	cp pixmap/hourglass.xpm $(MLVWMRCDIR)/pixmap/$(TIMERPROG).xpm
 	mkdir -p $(MLVWMRCDIR)/apps
 	install .mlvwm/apps/$(TIMERPROG) $(MLVWMRCDIR)/apps
 	mkdir -p $(MLVWMRCDIR)/MenuExtras

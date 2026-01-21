@@ -3,7 +3,7 @@ by Morgan Aldridge <morgant@makkintosshu.com>
 
 ## OVERVIEW
 
-A minimal set of X11 utilities which interact with & control Lucas de Sena's [pomod](https://github.com/phillbush/pomod/) pomodoro timer server & client: `xpomodbell` & `xpomodmenu`. They are powered by several other tools by Lucas de Sena, including [wmlaunchbutton](https://github.com/phillbush/wmlaunchbutton) & [xmenu](https://github.com/phillbush/xmenu), plus [mpv](https://mpv.io) for audio playback. They are intended for use with the [MLVWM](https://github.com/morgant/mlvwm) window manager, specifically the [mlvwmrc](https://github.com/morgant/mlvwmrc) configurations, as a "Menu Extra" swallowed into the menu bar.
+A minimal set of X11 utilities which interact with & control the [pomod](https://github.com/morgant/pomod/) pomodoro timer server & client: `xpomodbell` & `xpomodmenu`. They are powered by several tools by Lucas de Sena, the original developer of `pomod`, including [wmlaunchbutton](https://github.com/phillbush/wmlaunchbutton) & [xmenu](https://github.com/phillbush/xmenu), plus [mpv](https://mpv.io) for audio playback. They are intended for use with the [MLVWM](https://github.com/morgant/mlvwm) window manager, specifically the [mlvwmrc](https://github.com/morgant/mlvwmrc) configurations, as a "Menu Extra" swallowed into the menu bar.
 
 ## FEATURES
 
@@ -30,7 +30,7 @@ A minimal set of X11 utilities which interact with & control Lucas de Sena's [po
 ## PREREQUISITES
 
 * [mpv](https://mpv.io)
-* [pomod](https://github.com/phillbush/pomod)
+* [pomod](https://github.com/morgant/pomod)
 * [wmlaunchbutton](https://github.com/phillbush/wmlaunchbutton)
 * [xmenu](https://github.com/phillbush/xmenu)
 * `xterm`
