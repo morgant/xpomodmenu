@@ -1,4 +1,4 @@
-# xpomodmenu
+# ![hourglass icon](pixmap/hourglass.png) xpomodmenu
 by Morgan Aldridge <morgant@makkintosshu.com>
 
 ## OVERVIEW
