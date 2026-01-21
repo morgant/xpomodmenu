@@ -28,9 +28,9 @@ install: build
 	sed -i 's@sounds/@$(SOUNDSDIR)/@g' $(BINDIR)/$(SERVERPROG)
 	install -m 755 bin/$(TIMERPROG) $(BINDIR)/$(TIMERPROG)
 	mkdir -p $(PIXMAPDIR)
-	cp -R pixmap/* $(PIXMAPDIR)/
+	find pixmap -type f -iname "*.xpm" -exec install -m 644 {} $(PIXMAPDIR) \;
 	mkdir -p $(SOUNDSDIR)
-	cp -R sounds/* $(SOUNDSDIR)/
+	find pixmap -type f -iname "*.wav" -exec install -m 644 {} $(SOUNDSDIR) \;
 
 install-mlvwmrc-menuextra:
 	mkdir -p $(MLVWMRCDIR)/pixmap
