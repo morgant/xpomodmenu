@@ -30,7 +30,7 @@ install: build
 	mkdir -p $(PIXMAPDIR)
 	find pixmap -type f -iname "*.xpm" -exec install -m 644 {} $(PIXMAPDIR) \;
 	mkdir -p $(SOUNDSDIR)
-	find pixmap -type f -iname "*.wav" -exec install -m 644 {} $(SOUNDSDIR) \;
+	find sounds -type f -iname "*.wav" -exec install -m 644 {} $(SOUNDSDIR) \;
 
 install-mlvwmrc-menuextra:
 	mkdir -p $(MLVWMRCDIR)/pixmap
